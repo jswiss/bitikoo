@@ -8,9 +8,9 @@ import { render } from '@testing-library/react-native';
 import { App } from './App';
 
 it('renders the bitikoo welcome text', () => {
-  const { getByText } = render(<App />);
+	const { getByText } = render(<App />);
 
-  const welcomeText = getByText('Welcome to Bitikoo');
+	const welcomeText = getByText('Welcome to Bitikoo');
 
-  expect(welcomeText).toBeTruthy();
+	expect(welcomeText).toBeTruthy();
 });
