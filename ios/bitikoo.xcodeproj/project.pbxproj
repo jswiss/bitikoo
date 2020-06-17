@@ -17,7 +17,6 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* bitikooTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* bitikooTests.m */; };
 		5770C34D77254D7A9C872EB7 /* libWatermelonDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8566FD7FD5764D018AD41CDA /* libWatermelonDB.a */; };
-		747E1174249A1DC0006C06C8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747E1173249A1DC0006C06C8 /* File.swift */; };
 		972FFBC0910741AD4CE53CDB /* libPods-bitikoo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4B665A074690256498FE36 /* libPods-bitikoo-tvOS.a */; };
 		A6C643E14CA17628DF7E805A /* libPods-bitikoo-bitikooTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 811A422638D561FDA90D5672 /* libPods-bitikoo-bitikooTests.a */; };
 		B6538F74F592E2427DBC1F14 /* libPods-bitikoo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3E7DD4AE943F6B844298E5 /* libPods-bitikoo.a */; };
@@ -72,7 +71,6 @@
 		6E3E7DD4AE943F6B844298E5 /* libPods-bitikoo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bitikoo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7126173E9A97A3EEBD7F5A2E /* Pods-bitikoo-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitikoo-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-bitikoo-tvOSTests/Pods-bitikoo-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		747E1172249A1DC0006C06C8 /* bitikoo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bitikoo-Bridging-Header.h"; sourceTree = "<group>"; };
-		747E1173249A1DC0006C06C8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		811A422638D561FDA90D5672 /* libPods-bitikoo-bitikooTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bitikoo-bitikooTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8566FD7FD5764D018AD41CDA /* libWatermelonDB.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libWatermelonDB.a; sourceTree = "<group>"; };
 		BE0BD9ABD01AABC78F5CDCE4 /* Pods-bitikoo-bitikooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitikoo-bitikooTests.release.xcconfig"; path = "Target Support Files/Pods-bitikoo-bitikooTests/Pods-bitikoo-bitikooTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				747E1173249A1DC0006C06C8 /* File.swift */,
 				13B07FAE1A68108700A75B9A /* bitikoo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* bitikooTests */,
@@ -580,7 +577,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				747E1174249A1DC0006C06C8 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,7 +630,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC0108F9DBF346B72C30B4FE /* Pods-bitikoo-bitikooTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -666,7 +661,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE0BD9ABD01AABC78F5CDCE4 /* Pods-bitikoo-bitikooTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
