@@ -1,16 +1,12 @@
-/**
- * @format
- */
-
 import 'react-native';
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import { App } from './App';
 
-it('renders the bitikoo welcome text', () => {
+it('renders the bitikoo map welcome text', () => {
 	const { getByText } = render(<App />);
 
-	const welcomeText = getByText('Welcome to Bitikoo');
+	const mapText = getByText('This is the map');
 
-	expect(welcomeText).toBeTruthy();
+	expect(mapText).toBeTruthy();
 });
