@@ -1,36 +1,20 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { vasernDB } from '../../database/';
-
-console.log('db: ', vasernDB);
-
-function HomeScreen() {
-	return (
-		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-			<Text>Welcome to Bitikoo!</Text>
-		</View>
-	);
-}
-
-function SettingsScreen() {
-	return (
-		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-			<Text>Settings!</Text>
-		</View>
-	);
-}
+import { MapScreen } from '../../screens/map-screen';
+import { PlacesScreen } from '../../screens/places-screen';
+import { SettingsScreen } from '../../screens/settings-screen';
 
 const Tab = createBottomTabNavigator();
 
 export function App() {
 	return (
 		<NavigationContainer>
-			<Tab.Navigator>
-				<Tab.Screen name="Home" component={HomeScreen} />
+			<Tab.Navigator initialRouteName="Map">
+				<Tab.Screen name="Places" component={PlacesScreen} />
+				<Tab.Screen name="Map" component={MapScreen} />
 				<Tab.Screen name="Settings" component={SettingsScreen} />
 			</Tab.Navigator>
 		</NavigationContainer>
