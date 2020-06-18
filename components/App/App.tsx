@@ -6,9 +6,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MapScreen } from '../../screens/map-screen';
 import { PlacesScreen } from '../../screens/places-screen';
 import { SettingsScreen } from '../../screens/settings-screen';
-import { vasernDB } from '../../database/';
-
-console.log('db: ', vasernDB);
 
 const Tab = createBottomTabNavigator();
 

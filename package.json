@@ -41,7 +41,11 @@
 		"typescript": "^3.8.3"
 	},
 	"jest": {
+		"verbose": true,
 		"preset": "@testing-library/react-native",
+		"testMatch": [
+			"**/?(*.)+(test).ts?(x)"
+		],
 		"setupFiles": [
 			"./jest.setup.js"
 		],
@@ -53,6 +57,20 @@
 			"tsx",
 			"js",
 			"jsx"
-		]
+		],
+		"collectCoverageFrom": [
+			"**/*.{js,jsx}",
+			"!**/node_modules/**",
+			"!**/android/**",
+			"!**/ios/**"
+		],
+		"coverageThreshold": {
+			"global": {
+				"branches": 80,
+				"functions": 80,
+				"lines": 80,
+				"statements": -10
+			}
+		}
 	}
 }
