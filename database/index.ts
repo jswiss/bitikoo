@@ -1,16 +1,2 @@
-import Vasern from 'vasern';
-
-const placeSchema = {
-	name: 'Places',
-	props: {
-		place_name: 'string',
-		description: '?string',
-		latitude: 'string',
-		longitude: 'string',
-	},
-};
-
-export const vasernDB = new Vasern({
-	schemas: [placeSchema],
-	version: 1,
-});
+import SQLite from 'react-native-sqlite-storage';
+import { DatabaseInitialisation } from './database-initialisation';

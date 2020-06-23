@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -11,17 +11,14 @@ import SQLite from 'react-native-sqlite-storage';
 const Tab = createBottomTabNavigator();
 
 export function App() {
-	React.useEffect(() => {
+	useEffect(() => {
 		SQLite.DEBUG(true);
 		SQLite.enablePromise(true);
 
 		SQLite.openDatabase({
 			name: 'testDb',
 			location: 'default',
-		}).then((db) => {
-			console.log('db open!');
-			console.table(db);
-		});
+		}).then((db) => {});
 	}, []);
 	return (
 		<NavigationContainer>
