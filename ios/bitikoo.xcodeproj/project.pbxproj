@@ -16,6 +16,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* bitikooTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* bitikooTests.m */; };
+		74076A03249CF40A002B7900 /* swift-bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74076A02249CF40A002B7900 /* swift-bridge.swift */; };
 		972FFBC0910741AD4CE53CDB /* libPods-bitikoo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4B665A074690256498FE36 /* libPods-bitikoo-tvOS.a */; };
 		A6C643E14CA17628DF7E805A /* libPods-bitikoo-bitikooTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 811A422638D561FDA90D5672 /* libPods-bitikoo-bitikooTests.a */; };
 		B6538F74F592E2427DBC1F14 /* libPods-bitikoo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3E7DD4AE943F6B844298E5 /* libPods-bitikoo.a */; };
@@ -61,6 +62,8 @@
 		6E09D541A15D3D58BB2D955E /* Pods-bitikoo-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitikoo-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-bitikoo-tvOSTests/Pods-bitikoo-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E3E7DD4AE943F6B844298E5 /* libPods-bitikoo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bitikoo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7126173E9A97A3EEBD7F5A2E /* Pods-bitikoo-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitikoo-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-bitikoo-tvOSTests/Pods-bitikoo-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		74076A01249CF40A002B7900 /* bitikoo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bitikoo-Bridging-Header.h"; sourceTree = "<group>"; };
+		74076A02249CF40A002B7900 /* swift-bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "swift-bridge.swift"; sourceTree = "<group>"; };
 		811A422638D561FDA90D5672 /* libPods-bitikoo-bitikooTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bitikoo-bitikooTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE0BD9ABD01AABC78F5CDCE4 /* Pods-bitikoo-bitikooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitikoo-bitikooTests.release.xcconfig"; path = "Target Support Files/Pods-bitikoo-bitikooTests/Pods-bitikoo-bitikooTests.release.xcconfig"; sourceTree = "<group>"; };
 		CC0108F9DBF346B72C30B4FE /* Pods-bitikoo-bitikooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitikoo-bitikooTests.debug.xcconfig"; path = "Target Support Files/Pods-bitikoo-bitikooTests/Pods-bitikoo-bitikooTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -161,7 +164,6 @@
 				6E09D541A15D3D58BB2D955E /* Pods-bitikoo-tvOSTests.debug.xcconfig */,
 				7126173E9A97A3EEBD7F5A2E /* Pods-bitikoo-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,12 +177,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				74076A02249CF40A002B7900 /* swift-bridge.swift */,
 				13B07FAE1A68108700A75B9A /* bitikoo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* bitikooTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				3469F28629A34691405ECBF7 /* Pods */,
+				74076A01249CF40A002B7900 /* bitikoo-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -289,10 +293,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 3VR98H5MZT;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						DevelopmentTeam = 3VR98H5MZT;
+						LastSwiftMigration = 1150;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -530,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74076A03249CF40A002B7900 /* swift-bridge.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -584,7 +591,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC0108F9DBF346B72C30B4FE /* Pods-bitikoo-bitikooTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3VR98H5MZT;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -607,8 +616,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE0BD9ABD01AABC78F5CDCE4 /* Pods-bitikoo-bitikooTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 3VR98H5MZT;
 				INFOPLIST_FILE = bitikooTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -630,6 +641,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3VR98H5MZT;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -644,6 +656,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = bitikoo;
+				SWIFT_OBJC_BRIDGING_HEADER = "bitikoo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -657,6 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3VR98H5MZT;
 				INFOPLIST_FILE = bitikoo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -666,6 +680,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = bitikoo;
+				SWIFT_OBJC_BRIDGING_HEADER = "bitikoo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
