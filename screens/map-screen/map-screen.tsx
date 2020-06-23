@@ -18,24 +18,20 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export const MapScreen: React.FC = () => {
 	const [err, position] = useGeolocation();
-	console.log('1: ', err);
-	console.log('2: ', position);
 
 	return (
 		<View style={styles.container}>
-			{/* {coords && ( */}
-			<MapView
-				style={styles.map}
-				initialRegion={{
-					// latitude: coords.latitude,
-					latitude: 55.88,
-					longitude: -4.28,
-					// longitude: coords.longitude,
-					latitudeDelta: LATITUDE_DELTA,
-					longitudeDelta: LONGITUDE_DELTA,
-				}}
-			/>
-			{/* )} */}
+			{!err && position.latitude !== 0 && (
+				<MapView
+					style={styles.map}
+					initialRegion={{
+						latitude: position.latitude,
+						longitude: position.longitude,
+						latitudeDelta: LATITUDE_DELTA,
+						longitudeDelta: LONGITUDE_DELTA,
+					}}
+				/>
+			)}
 			<View pointerEvents="none" style={styles.members} />
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity style={[styles.bubble, styles.button]}>
