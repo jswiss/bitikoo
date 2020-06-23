@@ -6,10 +6,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MapScreen } from '../../screens/map-screen';
 import { PlacesScreen } from '../../screens/places-screen';
 import { SettingsScreen } from '../../screens/settings-screen';
+import SQLite from 'react-native-sqlite-storage';
 
 const Tab = createBottomTabNavigator();
 
 export function App() {
+	React.useEffect(() => {
+		SQLite.DEBUG(true);
+		SQLite.enablePromise(true);
+
+		SQLite.openDatabase({
+			name: 'testDb',
+			location: 'default',
+		}).then((db) => {
+			console.log('db open!');
+			console.table(db);
+		});
+	}, []);
 	return (
 		<NavigationContainer>
 			<Tab.Navigator initialRouteName="Map">
