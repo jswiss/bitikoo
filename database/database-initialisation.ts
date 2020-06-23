@@ -1,9 +1,15 @@
-import SQLite from 'react-native-sqlite-storage';
+import SQLite, { Transaction } from 'react-native-sqlite-storage';
 
 export class DatabaseInitialisation {
-	public updateDatabasetables(database: SQLite.SQLiteDatabase): Promise<void> {
+	// Perform any updates to the database schema. These can occur during initial configuration, or after an app store update.
+	// This should be called each time the database is opened.
+	public updateDatabaseTables(
+		database: SQLite.SQLiteDatabase,
+	): Promise<void | Transaction> {
 		let dbVersion: number = 0;
+		console.log('Beginning database updates...');
 
+		// First: create tables if they do not already exist
 		return database
 			.transaction(this.createTables)
 			.then(() => {
@@ -19,7 +25,7 @@ export class DatabaseInitialisation {
 				// This is included as an example of how you make database schema changes once the app has been shipped
 				if (dbVersion < 1) {
 					// Uncomment the next line, and the referenced function below, to enable this
-					// return database.transaction(this.preVersion1Inserts);
+					return database.transaction(this.preVersion1Inserts);
 				}
 				// otherwise,
 				return;
@@ -27,7 +33,7 @@ export class DatabaseInitialisation {
 			.then(() => {
 				if (dbVersion < 2) {
 					// Uncomment the next line, and the referenced function below, to enable this
-					// return database.transaction(this.preVersion2Inserts);
+					return database.transaction(this.preVersion2Inserts);
 				}
 				// otherwise,
 				return;
@@ -55,6 +61,7 @@ export class DatabaseInitialisation {
         place_name TEXT,
         list_id INTEGER,
         desc TEXT,
+        photo: TEXT,
         latitude REAL,
         longitude REAL,
         created_at NUMERIC,

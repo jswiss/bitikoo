@@ -18,7 +18,9 @@ export function App() {
 		SQLite.openDatabase({
 			name: 'testDb',
 			location: 'default',
-		}).then((db) => {});
+		}).then((db) => {
+			console.log(db);
+		});
 	}, []);
 	return (
 		<NavigationContainer>
