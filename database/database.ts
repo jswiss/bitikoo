@@ -9,7 +9,7 @@ import { AppState, AppStateStatus } from 'react-native';
 export interface Database {
 	// Create
 	createList(newListTitle: string): Promise<void>;
-	addPlace(place: Place, list: List): Promise<void>;
+	createPlaceAndAddToList(place: Place): Promise<void>;
 	// Read
 	getAllLists(): Promise<List[]>;
 	getListPlaces(list: List): Promise<Place[]>;
@@ -67,20 +67,18 @@ async function getAllLists(): Promise<List[]> {
 		});
 }
 
-async function addPlace(place: Place, list: List): Promise<void> {
-	if (list === undefined) {
-		return Promise.reject(Error('Could not add item to undefined list.'));
-	}
+async function createPlaceAndAddToList(place: Place): Promise<void> {
 	return getDatabase()
 		.then((db) =>
 			db.executeSql(
-				'INSERT INTO Place (place_name, desc, latitude, longitude,  list_id) VALUES (?, ?);',
+				'INSERT INTO Place (place_name, desc, photo, latitude, longitude, list_id) VALUES (?, ?);',
 				[
 					place.place_name,
 					place.desc,
+					place.photo,
 					place.latitude,
 					place.longitude,
-					list.list_id,
+					place.list_id,
 				],
 			),
 		)
@@ -127,9 +125,6 @@ async function getListPlaces(list: List): Promise<Place[]> {
 
 // TODO: need to update types to allow for one place being returned
 async function getPlace(place: Place): Promise<Place[]> {
-	if (place === undefined) {
-		return Promise.resolve([]);
-	}
 	return getDatabase()
 		.then((db) =>
 			db.executeSql(
@@ -153,7 +148,7 @@ async function getPlace(place: Place): Promise<Place[]> {
 				);
 				places.push(row);
 			}
-			console.log(`[db] Place data for place "${place.place_name}":`, places);
+			console.log(`[db] Place data for place "${place.place_id}":`, places);
 			return places;
 		});
 }
@@ -304,7 +299,7 @@ function handleAppStateChange(nextAppState: AppStateStatus) {
 
 export const sqliteDatabase: Database = {
 	createList,
-	addPlace,
+	createPlaceAndAddToList,
 	getAllLists,
 	getListPlaces,
 	getPlace,

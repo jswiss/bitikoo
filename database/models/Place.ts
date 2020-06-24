@@ -1,7 +1,7 @@
 export interface Place {
 	place_id: number;
 	place_name: string;
-	list_id: number;
+	list_id?: number;
 	desc?: string;
 	photo?: string;
 	latitude: number;
