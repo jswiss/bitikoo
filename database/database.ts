@@ -9,7 +9,7 @@ import { AppState, AppStateStatus } from 'react-native';
 export interface Database {
 	// Create
 	createList(newListTitle: string): Promise<void>;
-	addListPlace(place: Place, list: List): Promise<void>;
+	addPlace(place: Place, list: List): Promise<void>;
 	// Read
 	getAllLists(): Promise<List[]>;
 	getListPlaces(list: List): Promise<Place[]>;
@@ -67,7 +67,7 @@ async function getAllLists(): Promise<List[]> {
 		});
 }
 
-async function addListPlace(place: Place, list: List): Promise<void> {
+async function addPlace(place: Place, list: List): Promise<void> {
 	if (list === undefined) {
 		return Promise.reject(Error('Could not add item to undefined list.'));
 	}
@@ -304,7 +304,7 @@ function handleAppStateChange(nextAppState: AppStateStatus) {
 
 export const sqliteDatabase: Database = {
 	createList,
-	addListPlace,
+	addPlace,
 	getAllLists,
 	getListPlaces,
 	getPlace,
