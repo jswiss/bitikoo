@@ -8,7 +8,8 @@ import { AppState, AppStateStatus } from 'react-native';
 
 export interface Database {
 	// Create
-	createList(newListTitle: string): Promise<void>;
+	createList(newListName: string): Promise<void>;
+	createPlace(place: Place): Promise<void>;
 	createPlaceAndAddToList(place: Place): Promise<void>;
 	// Read
 	getAllLists(): Promise<List[]>;
@@ -27,15 +28,39 @@ let databaseInstance: SQLite.SQLiteDatabase | undefined;
 // const databaseSync: DropboxDatabaseSync = new DropboxDatabaseSync();
 
 // Insert a new list into the database
-async function createList(newListTitle: string): Promise<void> {
+async function createList(newListName: string): Promise<void> {
 	return getDatabase()
 		.then((db) =>
-			db.executeSql('INSERT INTO List (title) VALUES (?);', [newListTitle]),
+			db.executeSql('INSERT INTO List (list_name) VALUES (?);', [newListName]),
 		)
 		.then(([results]) => {
 			const { insertId } = results;
 			console.log(
-				`[db] Added list with title: "${newListTitle}"! InsertId: ${insertId}`,
+				`[db] Added list with name: "${newListName}"! InsertId: ${insertId}`,
+			);
+
+			// Queue database upload
+			// return databaseSync.upload();
+		});
+}
+async function createPlace(place: Place): Promise<void> {
+	return getDatabase()
+		.then((db) =>
+			db.executeSql(
+				'INSERT INTO Place (place_name, latitude, longitude, desc, photo) VALUES (?);',
+				[
+					place.place_name,
+					place.latitude,
+					place.longitude,
+					place.desc,
+					place.photo,
+				],
+			),
+		)
+		.then(([results]) => {
+			const { insertId } = results;
+			console.log(
+				`[db] Added place with name: "${place.place_name}"! InsertId: ${insertId}`,
 			);
 
 			// Queue database upload
@@ -99,7 +124,7 @@ async function getListPlaces(list: List): Promise<Place[]> {
 	return getDatabase()
 		.then((db) =>
 			db.executeSql(
-				'SELECT place_id as id, place_name, desc, photo FROM Place WHERE list_id = ?;',
+				'SELECT place_id as id, place_name, desc, latitude, longitude, photo FROM Place WHERE list_id = ?;',
 				[list.list_id],
 			),
 		)
@@ -299,6 +324,7 @@ function handleAppStateChange(nextAppState: AppStateStatus) {
 
 export const sqliteDatabase: Database = {
 	createList,
+	createPlace,
 	createPlaceAndAddToList,
 	getAllLists,
 	getListPlaces,
