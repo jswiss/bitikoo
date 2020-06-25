@@ -40,14 +40,29 @@ export function usePlaces(selectedList: List) {
 		await refreshPlaces(selectedList);
 	}
 
-	async function addListPlace(place: Place): Promise<void> {
+	async function addPlace(place: Place): Promise<void> {
 		await database.createPlace(place);
+		await refreshPlaces(selectedList);
+	}
+	async function getPlace(place: Place): Promise<void> {
+		await database.getPlace(place);
+		await refreshPlaces(selectedList);
+	}
+	async function updatePlace(place: Place): Promise<void> {
+		await database.updatePlace(place);
+		await refreshPlaces(selectedList);
+	}
+	async function deletePlace(place: Place): Promise<void> {
+		await database.deletePlace(place);
 		await refreshPlaces(selectedList);
 	}
 
 	return {
 		selectedPlaces,
-		addListPlace,
+		addPlace,
 		updateListPlace,
+		getPlace,
+		updatePlace,
+		deletePlace,
 	};
 }
