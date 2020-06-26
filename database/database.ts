@@ -80,14 +80,11 @@ async function getAllLists(): Promise<List[]> {
 			if (results === undefined) {
 				return [];
 			}
-			const count = results.rows.length;
-			const lists: List[] = [];
-			for (let i = 0; i < count; i++) {
-				const row = results.rows.item(i);
-				const { list_id, list_name } = row;
-				console.log(`[db] List title: ${list_name}, id: ${list_id}`);
-				lists.push({ list_id, list_name });
-			}
+			const rows = results.rows.raw();
+
+			const lists = rows.map((row) => {
+				return { list_name: row.list_name, list_id: row.list_id };
+			});
 			return lists;
 		});
 }
@@ -132,17 +129,18 @@ async function getListPlaces(list: List): Promise<Place[]> {
 			if (results === undefined) {
 				return [];
 			}
-			const count = results.rows.length;
-			const places: Place[] = [];
-			for (let i = 0; i < count; i++) {
-				const row: Place = results.rows.item(i);
-				const { place_name, desc, latitude, longitude, photo, place_id } = row;
+			const rows = results.rows.raw();
 
-				console.log(
-					`[db] Place name: ${place_name}, desc: ${desc}, latitude: ${latitude}, longitude: ${longitude}, photo: ${photo}, id: ${place_id}`,
-				);
-				places.push(row);
-			}
+			const places = rows.map((row) => {
+				return {
+					place_name: row.place_name,
+					desc: row.desc,
+					latitude: row.latitude,
+					longitude: row.longitude,
+					photo: row.photo,
+					place_id: row.place_id,
+				};
+			});
 			console.log(`[db] List items for list "${list.list_name}":`, places);
 			return places;
 		});
@@ -162,17 +160,18 @@ async function getPlace(place: Place): Promise<Place[]> {
 				return [];
 			}
 
-			const count = results.rows.length;
-			const places: Place[] = [];
-			for (let i = 0; i < count; i++) {
-				const row: Place = results.rows.item(i);
-				const { place_name, desc, latitude, longitude, photo, place_id } = row;
+			const rows = results.rows.raw();
 
-				console.log(
-					`[db] Place name: ${place_name}, desc: ${desc}, latitude: ${latitude}, longitude: ${longitude}, photo: ${photo}, id: ${place_id}`,
-				);
-				places.push(row);
-			}
+			const places = rows.map((row) => {
+				return {
+					place_name: row.place_name,
+					desc: row.desc,
+					latitude: row.latitude,
+					longitude: row.longitude,
+					photo: row.photo,
+					place_id: row.place_id,
+				};
+			});
 			console.log(`[db] Place data for place "${place.place_id}":`, places);
 			return places;
 		});
