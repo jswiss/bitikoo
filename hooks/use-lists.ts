@@ -17,8 +17,17 @@ export function useLists() {
 		refreshListOfLists();
 	}, [refreshListOfLists]);
 
-	function createList(newListTitle: string): Promise<void> {
-		return database.createList(newListTitle).then(refreshListOfLists);
+	async function createList(
+		newListTitle: string,
+		newListColour: string = '#f0f8ff',
+	): Promise<void> {
+		try {
+			await database
+				.createList(newListTitle, newListColour)
+				.then(refreshListOfLists);
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	function deleteList(listToDelete: List): Promise<void> {

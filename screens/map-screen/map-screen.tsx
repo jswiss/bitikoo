@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
+import { useLists } from '../../hooks/use-lists';
 import { useGeolocation } from '../../hooks/use-geolocation';
 
 const screen = Dimensions.get('window');
@@ -18,6 +19,8 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export const MapScreen: React.FC = () => {
 	const [err, position] = useGeolocation();
+	const { lists } = useLists();
+	console.log(lists);
 
 	return (
 		<View style={styles.container}>

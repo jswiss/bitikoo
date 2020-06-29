@@ -2,7 +2,7 @@ import SQLite from 'react-native-sqlite-storage';
 import { DatabaseInitialisation } from './database-initialisation';
 import { List } from './models/List';
 import { Place } from './models/Place';
-import { DATABASE } from './Constants';
+import { DATABASE } from './constants';
 // import { DropboxDatabaseSync } from '../sync/dropbox/DropboxDatabaseSync';
 import { AppState, AppStateStatus } from 'react-native';
 
@@ -34,7 +34,7 @@ async function createList(
 ): Promise<void> {
 	return getDatabase()
 		.then((db) =>
-			db.executeSql('INSERT INTO List (list_name, colour) VALUES (?);', [
+			db.executeSql('INSERT INTO List (list_name, colour) VALUES (?, ?);', [
 				newListName,
 				listColour,
 			]),
@@ -53,9 +53,10 @@ async function createPlace(place: Place): Promise<void> {
 	return getDatabase()
 		.then((db) =>
 			db.executeSql(
-				'INSERT INTO Place (place_name, latitude, longitude, desc, photo) VALUES (?);',
+				'INSERT INTO Place (place_name, list, latitude, longitude, desc, photo) VALUES (?, ?, ?, ?, ?, ?);',
 				[
 					place.place_name,
+					place.list,
 					place.latitude,
 					place.longitude,
 					place.desc,
@@ -80,7 +81,9 @@ async function getAllLists(): Promise<List[]> {
 	return getDatabase()
 		.then((db) =>
 			// Get all the lists, ordered by newest lists first
-			db.executeSql('SELECT list_id as id, title FROM List ORDER BY id DESC;'),
+			db.executeSql(
+				'SELECT list_id, list_name, colour FROM List ORDER BY list_id DESC;',
+			),
 		)
 		.then(([results]) => {
 			if (results === undefined) {
@@ -103,14 +106,14 @@ async function createPlaceAndAddToList(place: Place): Promise<void> {
 	return getDatabase()
 		.then((db) =>
 			db.executeSql(
-				'INSERT INTO Place (place_name, desc, photo, latitude, longitude, list_id) VALUES (?, ?);',
+				'INSERT INTO Place (place_name, desc, photo, latitude, longitude, list) VALUES (?, ?, ?, ?, ?, ?);',
 				[
 					place.place_name,
 					place.desc,
 					place.photo,
 					place.latitude,
 					place.longitude,
-					place.list_id,
+					place.list,
 				],
 			),
 		)
@@ -131,7 +134,7 @@ async function getListPlaces(list: List): Promise<Place[]> {
 	return getDatabase()
 		.then((db) =>
 			db.executeSql(
-				'SELECT place_id as id, place_name, desc, latitude, longitude, photo FROM Place WHERE list_id = ?;',
+				'SELECT place_id as id, place_name, desc, latitude, longitude, photo FROM Place WHERE list = ?;',
 				[list.list_id],
 			),
 		)
@@ -144,6 +147,7 @@ async function getListPlaces(list: List): Promise<Place[]> {
 			const places = rows.map((row) => {
 				return {
 					place_name: row.place_name,
+					list: row.list,
 					desc: row.desc,
 					latitude: row.latitude,
 					longitude: row.longitude,
@@ -180,6 +184,7 @@ async function getPlace(place: Place): Promise<Place[]> {
 					longitude: row.longitude,
 					photo: row.photo,
 					place_id: row.place_id,
+					list: row.list,
 				};
 			});
 			'';
@@ -192,13 +197,14 @@ async function updatePlace(place: Place): Promise<void> {
 	return getDatabase()
 		.then((db) =>
 			db.executeSql(
-				'UPDATE Place SET place_name = ?, desc = ?, latitude = ?, longitude = ?, photo = ? WHERE place_id = ?;',
+				'UPDATE Place SET place_name = ?, desc = ?, latitude = ?, longitude = ?, photo = ?, list = ? WHERE place_id = ?;',
 				[
 					place.place_name,
 					place.desc,
 					place.latitude,
 					place.longitude,
 					place.photo,
+					place.list,
 					place.place_id,
 				],
 			),

@@ -41,8 +41,10 @@ export class DatabaseInitialisation {
 	}
 
 	private createTables(transaction: SQLite.Transaction) {
+		console.log('in create tables');
+
 		// DANGER! For dev only
-		const dropAllTables = false;
+		const dropAllTables = true;
 		if (dropAllTables) {
 			transaction.executeSql('DROP TABLE IF EXISTS List;');
 			transaction.executeSql('DROP TABLE IF EXISTS Place;');
@@ -51,31 +53,35 @@ export class DatabaseInitialisation {
 
 		transaction.executeSql(
 			`CREATE TABLE IF NOT EXISTS List(
-        list_id INTEGER PRIMARY KEY NOT NULL,
+        list_id INTEGER PRIMARY KEY,
         list_name TEXT NOT NULL,
-        colour TEXT
-      );`,
+        colour TEXT DEFAULT '#e6e6fa'
+        );`,
 		);
 		transaction.executeSql(
-			`CREATE TABLE IF NOT EXISTS Place(
-        place_id INTEGER PRIMARY KEY NOT NULL,
-        place_name TEXT,
-        list_id INTEGER,
+			"INSERT INTO List(list_name) VALUES('Default List')",
+		);
+
+		transaction.executeSql(`
+      CREATE TABLE IF NOT EXISTS Place(
+        place_id INTEGER PRIMARY KEY,
+        list INTEGER,
         desc TEXT,
-        photo: TEXT,
+        photo TEXT,
         latitude REAL,
         longitude REAL,
-        created_at NUMERIC,
-        updated_at NUMERIC,
-        FOREIGN_KEY (list_id) REFERENCES List (list_id)
-      );`,
-		);
+        created_at REAL,
+        updated_at REAL,
+        FOREIGN KEY ( list ) REFERENCES List ( list_id )
+      );
+    `);
 		transaction.executeSql(
 			`CREATE TABLE IF NOT EXISTS Version(
-				version_id INTEGER PRIMARY KEY NOT NULL,
-				version INTEGER
-				);`,
+                  version_id INTEGER PRIMARY KEY NOT NULL,
+                  version INTEGER
+                  );`,
 		);
+		console.log('After CREATE Version');
 	}
 
 	private getDatabaseVersion(database: SQLite.SQLiteDatabase): Promise<number> {
@@ -98,7 +104,7 @@ export class DatabaseInitialisation {
 	private preVersion1Inserts(transaction: SQLite.Transaction) {
 		console.log('Running pre-version 1 DB inserts');
 		// Make schema changes
-		transaction.executeSql('ALTER TABLE ...');
+		// transaction.executeSql('ALTER TABLE ...');
 		// Lastly, update the database version
 		transaction.executeSql('INSERT INTO Version (version) VALUES (1);');
 	}
@@ -107,7 +113,7 @@ export class DatabaseInitialisation {
 		console.log('Running pre-version 2 DB inserts');
 
 		// Make schema changes
-		transaction.executeSql('ALTER TABLE ...');
+		// transaction.executeSql('ALTER TABLE ...');
 		// Lastly, update the database version
 		transaction.executeSql('INSERT INTO Version (version) VALUES (2);');
 	}
