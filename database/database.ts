@@ -8,7 +8,7 @@ import { AppState, AppStateStatus } from 'react-native';
 
 export interface Database {
 	// Create
-	createList(newListName: string): Promise<void>;
+	createList(newListName: string, listColour: string): Promise<void>;
 	createPlace(place: Place): Promise<void>;
 	createPlaceAndAddToList(place: Place): Promise<void>;
 	// Read
@@ -28,10 +28,16 @@ let databaseInstance: SQLite.SQLiteDatabase | undefined;
 // const databaseSync: DropboxDatabaseSync = new DropboxDatabaseSync();
 
 // Insert a new list into the database
-async function createList(newListName: string): Promise<void> {
+async function createList(
+	newListName: string,
+	listColour: string,
+): Promise<void> {
 	return getDatabase()
 		.then((db) =>
-			db.executeSql('INSERT INTO List (list_name) VALUES (?);', [newListName]),
+			db.executeSql('INSERT INTO List (list_name, colour) VALUES (?);', [
+				newListName,
+				listColour,
+			]),
 		)
 		.then(([results]) => {
 			const { insertId } = results;
@@ -83,7 +89,11 @@ async function getAllLists(): Promise<List[]> {
 			const rows = results.rows.raw();
 
 			const lists = rows.map((row) => {
-				return { list_name: row.list_name, list_id: row.list_id };
+				return {
+					list_name: row.list_name,
+					colour: row.colour,
+					list_id: row.list_id,
+				};
 			});
 			return lists;
 		});
@@ -171,7 +181,8 @@ async function getPlace(place: Place): Promise<Place[]> {
 					photo: row.photo,
 					place_id: row.place_id,
 				};
-			});``
+			});
+			'';
 			console.log(`[db] Place data for place "${place.place_id}":`, places);
 			return places;
 		});
@@ -204,10 +215,10 @@ async function updatePlace(place: Place): Promise<void> {
 async function updateList(list: List): Promise<void> {
 	return getDatabase()
 		.then((db) =>
-			db.executeSql('UPDATE List SET list_name = ? WHERE list_id = ?;', [
-				list.list_name,
-				list.list_id,
-			]),
+			db.executeSql(
+				'UPDATE List SET list_name = ?, colour = ? WHERE list_id = ?;',
+				[list.list_name, list.colour, list.list_id],
+			),
 		)
 		.then(([results]) => {
 			console.log(`results: ${results}`);

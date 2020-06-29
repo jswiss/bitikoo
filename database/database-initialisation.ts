@@ -52,7 +52,8 @@ export class DatabaseInitialisation {
 		transaction.executeSql(
 			`CREATE TABLE IF NOT EXISTS List(
         list_id INTEGER PRIMARY KEY NOT NULL,
-        list_name TEXT
+        list_name TEXT NOT NULL,
+        colour TEXT
       );`,
 		);
 		transaction.executeSql(
