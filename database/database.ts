@@ -171,7 +171,7 @@ async function getPlace(place: Place): Promise<Place[]> {
 					photo: row.photo,
 					place_id: row.place_id,
 				};
-			});
+			});``
 			console.log(`[db] Place data for place "${place.place_id}":`, places);
 			return places;
 		});
