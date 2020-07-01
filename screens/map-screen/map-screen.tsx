@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import {
 	StyleSheet,
 	View,
@@ -7,7 +7,8 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 import MapView from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
+
+import { useGeolocation } from '../../hooks/use-geolocation';
 
 const screen = Dimensions.get('window');
 
@@ -16,35 +17,16 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export const MapScreen: React.FC = () => {
-	interface Coords {
-		latitude: number;
-		longitude: number;
-	}
-
-	const defaultCoords = { latitude: 0, longitude: 0 };
-	const ref = useRef(null);
-	const [coords, setCoords] = useState<Coords>(defaultCoords);
-
-	useEffect(() => {
-		Geolocation.getCurrentPosition((info) =>
-			setCoords({
-				latitude: info.coords.latitude,
-				longitude: info.coords.longitude,
-			}),
-		);
-	}, [coords]);
-
-	console.log(coords);
+	const [err, position] = useGeolocation();
 
 	return (
 		<View style={styles.container}>
-			{coords.longitude !== 0 && (
+			{!err && position.latitude !== 0 && (
 				<MapView
 					style={styles.map}
-					ref={ref}
 					initialRegion={{
-						latitude: coords.latitude,
-						longitude: coords.longitude,
+						latitude: position.latitude,
+						longitude: position.longitude,
 						latitudeDelta: LATITUDE_DELTA,
 						longitudeDelta: LONGITUDE_DELTA,
 					}}
