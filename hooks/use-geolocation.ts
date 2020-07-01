@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Geolocation from '@react-native-community/geolocation';
 
-interface GeolocationData {
+export interface GeolocationData {
 	latitude: number;
 	longitude: number;
 }

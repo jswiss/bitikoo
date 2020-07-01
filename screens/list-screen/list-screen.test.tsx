@@ -14,8 +14,7 @@ test('renders a list', () => {
 			<ListScreen />
 		</DatabaseProvider>
 	);
-	const { getByText, debug } = render(dbLists);
-	debug();
+	const { getByText } = render(dbLists);
 
 	expect(getByText(/New List/)).toBeTruthy();
 });

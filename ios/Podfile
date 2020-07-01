@@ -77,6 +77,8 @@ target 'bitikoo' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   pod 'react-native-sqlite-storage', :path => '../node_modules/react-native-sqlite-storage'
+  pod 'react-native-geolocation', path: '../node_modules/@react-native-community/geolocation'
+  # pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
 
   target 'bitikooTests' do
     inherit! :complete

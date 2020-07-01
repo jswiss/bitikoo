@@ -12,7 +12,8 @@ import { useLists } from '../../hooks/use-lists';
 
 export const ListScreen: React.FC = () => {
 	const { lists } = useLists();
-	console.log('LISTS:::::::::::::::::::', lists);
+
+	console.log('LISTS::', lists);
 
 	return (
 		<View style={styles.container}>

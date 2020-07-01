@@ -6,6 +6,4 @@ export interface Place {
 	photo?: string;
 	latitude: number;
 	longitude: number;
-	created_at?: string;
-	updated_at?: string;
 }

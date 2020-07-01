@@ -40,6 +40,14 @@ export class DatabaseInitialisation {
 			});
 	}
 
+	public getDateString() {
+		const now = new Date();
+		const day = now.getDate();
+		const month = now.getMonth();
+		const year = now.getFullYear();
+		return `${year}-${month}-${day}`;
+	}
+
 	private createTables(transaction: SQLite.Transaction) {
 		console.log('in create tables');
 
@@ -58,6 +66,8 @@ export class DatabaseInitialisation {
         colour TEXT DEFAULT '#e6e6fa'
         );`,
 		);
+
+		// create update trigger for List table
 		transaction.executeSql(
 			"INSERT INTO List(list_name) VALUES('Default List')",
 		);
@@ -70,16 +80,14 @@ export class DatabaseInitialisation {
         photo TEXT,
         latitude REAL,
         longitude REAL,
-        created_at REAL,
-        updated_at REAL,
         FOREIGN KEY ( list ) REFERENCES List ( list_id )
       );
     `);
 		transaction.executeSql(
 			`CREATE TABLE IF NOT EXISTS Version(
-                  version_id INTEGER PRIMARY KEY NOT NULL,
-                  version INTEGER
-                  );`,
+        version_id INTEGER PRIMARY KEY NOT NULL,
+        version INTEGER
+      );`,
 		);
 		console.log('After CREATE Version');
 	}
