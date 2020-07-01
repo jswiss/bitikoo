@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	View,
 	FlatList,
 	StyleSheet,
 	TouchableOpacity,
 	Text,
+	Modal,
+	Alert,
 } from 'react-native';
 
 import { ListItem } from '../../components/list-item';
+import { ListForm } from '../../components/list-form';
 import { useLists } from '../../hooks/use-lists';
 
 export const ListScreen: React.FC = () => {
 	const { lists } = useLists();
-
-	console.log('LISTS::', lists);
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.button}>
 				<TouchableOpacity
 					style={styles.newListButton}
-					onPress={() => console.log('pressed')}>
+					onPress={() => setModalVisible(true)}>
 					<Text style={styles.newListButtonIcon}>🖋 New List</Text>
 				</TouchableOpacity>
 			</View>
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => {
+					Alert.alert('Modal has been closed.');
+				}}>
+				<ListForm />
+			</Modal>
 			<FlatList
 				data={lists}
 				renderItem={(list) => (
