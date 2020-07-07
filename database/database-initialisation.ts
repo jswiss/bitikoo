@@ -6,7 +6,7 @@ export class DatabaseInitialisation {
 	public updateDatabaseTables(
 		database: SQLite.SQLiteDatabase,
 	): Promise<void | Transaction> {
-		let dbVersion: number = 0;
+		let dbVersion = 0;
 		console.log('Beginning database updates...');
 
 		// First: create tables if they do not already exist
@@ -63,13 +63,8 @@ export class DatabaseInitialisation {
 			`CREATE TABLE IF NOT EXISTS List(
         list_id INTEGER PRIMARY KEY,
         list_name TEXT NOT NULL,
-        colour TEXT DEFAULT '#e6e6fa'
+        colour TEXT DEFAULT 'gold'
         );`,
-		);
-
-		// create update trigger for List table
-		transaction.executeSql(
-			"INSERT INTO List(list_name) VALUES('Default List')",
 		);
 
 		transaction.executeSql(`

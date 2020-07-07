@@ -14,3 +14,19 @@ export const NULL_PLACE = {
 	created_at: '',
 	updated_at: '',
 };
+
+export const LIGHT_COLOURS = [
+	'gold',
+	'darkorange',
+	'lightgrey',
+	'lightpink',
+	'turquoise',
+];
+export const DARK_COLOURS = [
+	'maroon',
+	'indigo',
+	'green',
+	'darkslateblue',
+	'black',
+];
+export const ALL_COLOURS = [...LIGHT_COLOURS, ...DARK_COLOURS];
