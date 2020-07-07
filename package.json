@@ -26,6 +26,7 @@
 		"react-native-safe-area-context": "^3.0.5",
 		"react-native-screens": "^2.8.0",
 		"react-native-sqlite-storage": "^5.0.0",
+		"react-native-svg": "^12.1.0",
 		"react-navigation": "^4.3.9",
 		"vasern": "^0.3.61"
 	},

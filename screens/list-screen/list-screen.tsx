@@ -12,11 +12,8 @@ import {
 import { PickerIOS } from '@react-native-community/picker';
 
 import { useLists } from '../../hooks/use-lists';
-import {
-	ALL_COLOURS,
-	LIGHT_COLOURS,
-	DARK_COLOURS,
-} from '../../database/constants';
+import { ColourBox } from '../../components/colour-box';
+import { ALL_COLOURS } from '../../database/constants';
 
 type ListName = string;
 type ListColour = string;
@@ -91,10 +88,11 @@ export const ListScreen: React.FC = () => {
 				</View>
 			</Modal>
 			{lists.map((list) => (
-				<View
-					key={list.list_id}
-					style={{ ...styles.listItem, backgroundColor: list.colour }}>
-					<Text style={styles.listText}>{list.list_name}</Text>
+				<View key={list.list_id} style={styles.listItem}>
+					<ColourBox colour={list.colour || 'white'} />
+					<Text style={{ ...styles.listText, color: list.colour || 'black' }}>
+						{list.list_name}
+					</Text>
 				</View>
 			))}
 		</View>
@@ -112,11 +110,15 @@ const styles = StyleSheet.create({
 	},
 	listItem: {
 		width: '80%',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
 		height: 30,
 		marginTop: 5,
 		marginBottom: 5,
 	},
 	listText: {
+		marginLeft: 10,
 		textAlign: 'center',
 		color: 'seashell',
 		fontSize: 20,
@@ -133,6 +135,7 @@ const styles = StyleSheet.create({
 	},
 	newListButtonIcon: {
 		fontSize: 20,
+		marginBottom: 50,
 	},
 	picker: { height: 500, width: 200 },
 	formContainer: {
