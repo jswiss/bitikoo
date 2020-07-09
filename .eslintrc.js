@@ -43,6 +43,7 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'warn',
 		'@typescript-eslint/no-magic-numbers': 'warn',
 		'@typescript-eslint/no-unused-vars': 'error',
+		'@typescript-eslint/no-non-null-assertion': 0,
 		'@typescript-eslint/explicit-function-return-type': 0,
 		'@typescript-eslint/no-use-before-define': 0,
 		'@typescript-eslint/camelcase': 0,

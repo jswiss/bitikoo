@@ -1,13 +1,8 @@
-import React from 'react';
-import {
-	StyleSheet,
-	View,
-	Text,
-	Dimensions,
-	TouchableOpacity,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
 
+import { Camera } from '../../components/camera';
 import { EnIcon } from '../../components/en-icon';
 import { useGeolocation } from '../../hooks/use-geolocation';
 
@@ -19,6 +14,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export const MapScreen: React.FC = () => {
 	const [err, position] = useGeolocation();
+	const [cameraOpen, setCameraOpen] = useState<boolean>(false);
 
 	return (
 		<View style={styles.container}>
@@ -35,10 +31,13 @@ export const MapScreen: React.FC = () => {
 			)}
 			<View pointerEvents="none" style={styles.members} />
 			<View style={styles.buttonContainer}>
-				<TouchableOpacity style={[styles.bubble, styles.button]}>
-					<EnIcon name="camera" size={40} colour="black" />
+				<TouchableOpacity
+					style={[styles.bubble, styles.button]}
+					onPress={() => setCameraOpen(true)}>
+					<EnIcon name="plus" size={50} colour="black" />
 				</TouchableOpacity>
 			</View>
+			{cameraOpen && <Camera />}
 		</View>
 	);
 };
