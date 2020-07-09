@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DatabaseContext } from '../providers/database-context';
+import { DatabaseContext } from '../containers/database-context';
 import { Database } from '../database/database';
 
 export function useDatabase(): Database {

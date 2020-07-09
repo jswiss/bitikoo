@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SQLite from 'react-native-sqlite-storage';
 
-import { DatabaseProvider } from '../../providers/database-context';
+import { DatabaseProvider } from '../../containers/database-context';
 import { MapScreen } from '../../screens/map-screen';
 import { ListScreen } from '../../screens/list-screen';
 import { SettingsScreen } from '../../screens/settings-screen';

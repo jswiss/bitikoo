@@ -312,6 +312,8 @@ PODS:
     - React
   - RNSVG (12.1.0):
     - React
+  - RNVectorIcons (7.0.0):
+    - React
   - vasern (0.3.61):
     - React
   - Yoga (1.14.0)
@@ -375,6 +377,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - vasern (from `../node_modules/vasern`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -462,6 +465,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   vasern:
     :path: "../node_modules/vasern"
   Yoga:
@@ -513,10 +518,11 @@ SPEC CHECKSUMS:
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
+  RNVectorIcons: da6fe858f5a65d7bbc3379540a889b0b12aa5976
   vasern: 9e0506f249bf9b5131e7935b69502e6b5fb01ccb
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 80c1e04151fff1e12733f321c804a4c076eb880e
+PODFILE CHECKSUM: 6532c8cf5060d90b6811c8deb940aa20e6005da1
 
 COCOAPODS: 1.9.1

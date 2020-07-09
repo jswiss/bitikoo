@@ -35,7 +35,7 @@ export const MapScreen: React.FC = () => {
 			<View pointerEvents="none" style={styles.members} />
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity style={[styles.bubble, styles.button]}>
-					<Text>Fit Markers Onto Map</Text>
+					<Text></Text>
 				</TouchableOpacity>
 			</View>
 		</View>
