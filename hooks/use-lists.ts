@@ -19,12 +19,19 @@ export function useLists() {
 
 	async function createList(
 		newListTitle: string,
-		newListColour: string = '#f0f8ff',
+		newListColour = 'gold',
 	): Promise<void> {
 		try {
 			await database
 				.createList(newListTitle, newListColour)
 				.then(refreshListOfLists);
+		} catch (err) {
+			console.error(err);
+		}
+	}
+	async function updateList(list: List): Promise<void> {
+		try {
+			await database.updateList(list).then(refreshListOfLists);
 		} catch (err) {
 			console.error(err);
 		}
@@ -38,7 +45,7 @@ export function useLists() {
 		return Promise.reject(Error('Could not delete an undefined list'));
 	}
 
-	async function selectList(list: List) {
+	function selectList(list: List) {
 		setSelectedList(list);
 	}
 
@@ -46,6 +53,7 @@ export function useLists() {
 		lists,
 		selectedList,
 		createList,
+		updateList,
 		deleteList,
 		selectList,
 	};
