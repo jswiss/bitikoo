@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
+import { EnIcon } from '../../components/en-icon';
 import { useGeolocation } from '../../hooks/use-geolocation';
 
 const screen = Dimensions.get('window');
@@ -35,7 +36,7 @@ export const MapScreen: React.FC = () => {
 			<View pointerEvents="none" style={styles.members} />
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity style={[styles.bubble, styles.button]}>
-					<Text></Text>
+					<EnIcon name="camera" size={40} colour="black" />
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -52,30 +53,35 @@ const styles = StyleSheet.create({
 		...StyleSheet.absoluteFillObject,
 	},
 	bubble: {
-		flex: 1,
+		width: 80,
+		height: 80,
 		backgroundColor: 'rgba(255,255,255,0.7)',
 		paddingHorizontal: 18,
 		paddingVertical: 12,
-		borderRadius: 20,
+		borderRadius: 50,
 		marginRight: 20,
 	},
 	button: {
 		width: 80,
+		height: 80,
 		paddingHorizontal: 12,
 		alignItems: 'center',
+		justifyContent: 'center',
 		marginHorizontal: 10,
 	},
 	buttonContainer: {
+		width: 80,
+		height: 80,
 		flexDirection: 'row',
 		marginVertical: 20,
 		backgroundColor: 'transparent',
-		marginBottom: 400,
+		marginBottom: 50,
+		justifyContent: 'center',
 	},
 	members: {
 		flexDirection: 'column',
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		width: '100%',
 		paddingHorizontal: 10,
 	},
 });
