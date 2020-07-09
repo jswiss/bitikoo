@@ -45,7 +45,7 @@ export function useLists() {
 		return Promise.reject(Error('Could not delete an undefined list'));
 	}
 
-	async function selectList(list: List) {
+	function selectList(list: List) {
 		setSelectedList(list);
 	}
 
