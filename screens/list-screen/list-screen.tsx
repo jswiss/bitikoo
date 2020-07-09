@@ -10,38 +10,56 @@ import {
 	Alert,
 } from 'react-native';
 import { PickerIOS } from '@react-native-community/picker';
+import { useNavigation } from '@react-navigation/native';
 
 import { useLists } from '../../hooks/use-lists';
 import { ColourBox } from '../../components/colour-box';
 import { ALL_COLOURS } from '../../database/constants';
+import { List } from '../../database/models/List';
 
 type ListName = string;
 type ListColour = string;
 
 export const ListScreen: React.FC = () => {
-	const { lists, createList } = useLists();
+	const { lists, createList, updateList } = useLists();
+
 	const [formOpen, setFormOpen] = useState(false);
-	console.log(lists);
 	const [name, setName] = useState<ListName>('');
+	const [listId, setListId] = useState<number | null>(null);
 	const [colour, setColour] = useState<ListColour>('');
+
+	const navigation = useNavigation();
 
 	const handleSubmit = () => {
 		if (name === '' || colour === '') {
 			return;
 		}
-		console.log('before closed');
 		setFormOpen(false);
-		console.log('this should have closed');
+		if (listId) {
+			updateList({ list_id: listId, list_name: name, colour });
+			clearForm();
+		} else {
+			createList(name, colour);
+			clearForm();
+		}
+	};
 
-		createList(name, colour);
+	const clearForm = () => {
+		setListId(null);
+		setName('');
+		setColour('');
 	};
 
 	const handleCancel = () => {
-		console.log('canceling the form, closing that sucka');
-
-		setName('');
-		setColour('');
+		clearForm();
 		setFormOpen(false);
+	};
+
+	const openEditForm = (list: List) => {
+		setFormOpen(true);
+		setListId(list.list_id);
+		setName(list.list_name);
+		setColour(list.colour || 'gold');
 	};
 	return (
 		<View style={styles.container}>
@@ -90,9 +108,23 @@ export const ListScreen: React.FC = () => {
 			{lists.map((list) => (
 				<View key={list.list_id} style={styles.listItem}>
 					<ColourBox colour={list.colour || 'white'} />
-					<Text style={{ ...styles.listText, color: list.colour || 'black' }}>
+					<Text
+						onPress={() =>
+							navigation.navigate('List', {
+								list,
+							})
+						}
+						style={{
+							...styles.listText,
+							color: list.colour || 'black',
+						}}>
 						{list.list_name}
 					</Text>
+					<TouchableOpacity
+						onPress={() => openEditForm(list)}
+						style={styles.editItem}>
+						<Text>🔧</Text>
+					</TouchableOpacity>
 				</View>
 			))}
 		</View>
@@ -108,12 +140,15 @@ const styles = StyleSheet.create({
 		marginTop: 50,
 		height: '100%',
 	},
+	editItem: {
+		marginLeft: 'auto',
+	},
 	listItem: {
-		width: '80%',
+		width: '60%',
 		flexDirection: 'row',
-		justifyContent: 'center',
+		justifyContent: 'flex-start',
 		alignItems: 'center',
-		height: 30,
+		height: 50,
 		marginTop: 5,
 		marginBottom: 5,
 	},

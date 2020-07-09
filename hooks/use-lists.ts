@@ -19,12 +19,19 @@ export function useLists() {
 
 	async function createList(
 		newListTitle: string,
-		newListColour: string = '#f0f8ff',
+		newListColour = 'gold',
 	): Promise<void> {
 		try {
 			await database
 				.createList(newListTitle, newListColour)
 				.then(refreshListOfLists);
+		} catch (err) {
+			console.error(err);
+		}
+	}
+	async function updateList(list: List): Promise<void> {
+		try {
+			await database.updateList(list).then(refreshListOfLists);
 		} catch (err) {
 			console.error(err);
 		}
@@ -46,6 +53,7 @@ export function useLists() {
 		lists,
 		selectedList,
 		createList,
+		updateList,
 		deleteList,
 		selectList,
 	};

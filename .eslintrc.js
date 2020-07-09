@@ -45,5 +45,6 @@ module.exports = {
 		'@typescript-eslint/no-unused-vars': 'error',
 		'@typescript-eslint/explicit-function-return-type': 0,
 		'@typescript-eslint/no-use-before-define': 0,
+		'@typescript-eslint/camelcase': 0,
 	},
 };
