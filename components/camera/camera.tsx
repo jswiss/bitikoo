@@ -93,6 +93,7 @@ export const Camera: React.FC = () => {
 						try {
 							setIsRecording(true);
 							const data = await takePicture();
+							// TODO: Install CameraRoll, use it to save the local file there, and get the URI on CameraRoll to access the pic
 							console.log('CAMERA DATA', data);
 						} catch (error) {
 							console.error('EEEEEERRROOOOORRRRRR', error);
